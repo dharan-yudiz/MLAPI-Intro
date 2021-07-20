@@ -10,7 +10,7 @@ namespace MLAPI.Demo
 {
     public class Chat : NetworkBehaviour
     {
-        private NetworkList<string> ChatMessages = new NetworkList<string>(new MLAPI.NetworkVariable.NetworkVariableSettings
+        private NetworkList<string> ChatMessages = new NetworkList<string>(new NetworkVariable.NetworkVariableSettings
         {
             ReadPermission = MLAPI.NetworkVariable.NetworkVariablePermission.Everyone,
             WritePermission = MLAPI.NetworkVariable.NetworkVariablePermission.Everyone,
