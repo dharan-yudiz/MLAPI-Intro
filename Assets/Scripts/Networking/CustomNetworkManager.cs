@@ -10,10 +10,12 @@ namespace MLAPI.Demo
     public class CustomNetworkManager : NetworkManager
     {
         static CustomNetworkManager _instance;
+        private static Dictionary<ulong, PlayerData> ClientData;
+        string serverPassword;
+
+
         public static CustomNetworkManager Instance => _instance;
 
-
-        public string Password;
 
 
         private void Awake()
@@ -39,16 +41,23 @@ namespace MLAPI.Demo
         }
 
 
-        public void Host()
+        public void Host(string Playername, string password)
         {
+            serverPassword = password;
+
+            ClientData = new Dictionary<ulong, PlayerData>();
+            ClientData[LocalClientId] = new PlayerData(Playername);
+
             ConnectionApprovalCallback += ApprovalCheck;
             StartHost();
         }
 
 
-        public void Client(string password)
+        public void Client(ConnectionPayload connectionPayload)
         {
-            NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(password);
+            var payload = JsonUtility.ToJson(connectionPayload);
+
+            NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(payload);
             Singleton.StartClient();
         }
 
@@ -69,34 +78,64 @@ namespace MLAPI.Demo
         }
 
 
+        public static PlayerData? GetPlayerData(ulong clientId)
+        {
+            if (ClientData.TryGetValue(clientId, out PlayerData playerData))
+            {
+                return playerData;
+            }
+
+            return null;
+        }
 
         #region Event Callbacks
 
-        private void ApprovalCheck(byte[] connectionData, ulong arg2, ConnectionApprovedDelegate callback)
+        private void ApprovalCheck(byte[] connectionData, ulong clientID, ConnectionApprovedDelegate callback)
         {
-            string password = System.Text.Encoding.ASCII.GetString(connectionData);
+            string payload = System.Text.Encoding.ASCII.GetString(connectionData);
+            var connectionPayload = JsonUtility.FromJson<ConnectionPayload>(payload);
 
-            bool approveConnection = password == Password;
+
+            bool approveConnection = connectionPayload.Password == serverPassword;
+
 
             Vector3 spawnPos = Vector3.zero;
             Quaternion spawnRot = Quaternion.identity;
 
-            switch (NetworkManager.Singleton.ConnectedClients.Count)
+            if (approveConnection)
             {
-                case 1:
-                    spawnPos = new Vector3(0f, 0f, 0f);
-                    spawnRot = Quaternion.Euler(0f, 180f, 0f);
-                    break;
-                case 2:
-                    spawnPos = new Vector3(2f, 0f, 0f);
-                    spawnRot = Quaternion.Euler(0f, 225, 0f);
-                    break;
+
+                switch (ConnectedClients.Count)
+                {
+                    case 1:
+                        spawnPos = new Vector3(0f, 0f, 0f);
+                        spawnRot = Quaternion.Euler(0f, 180f, 0f);
+                        break;
+                    case 2:
+                        spawnPos = new Vector3(2f, 0f, 0f);
+                        spawnRot = Quaternion.Euler(0f, 225, 0f);
+                        break;
+                }
+
+
+                ClientData[clientID] = new PlayerData(connectionPayload.PlayerName);
+
+            }
+            else
+            {
+                Debug.Log("Connection rejected");
             }
 
             callback(true, null, approveConnection, spawnPos, spawnRot);
+
         }
         private void HandleClientDisconnect(ulong obj)
         {
+            if (NetworkManager.Singleton.IsServer)
+            {
+                ClientData.Remove(obj);
+            }
+
             if (obj.Equals(LocalClientId))
             {
                 UIController.instance.HideCurrentScreen();

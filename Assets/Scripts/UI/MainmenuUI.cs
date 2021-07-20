@@ -15,6 +15,19 @@ namespace MLAPI.Demo
         [SerializeField] InputField NameField;
         [SerializeField] InputField PasswordField;
 
+        public override void OnScreenShowCalled()
+        {
+            base.OnScreenShowCalled();
+            NameField.text = "";
+            PasswordField.text = "";
+        }
+
+        public override void OnScreenHideCalled()
+        {
+            base.OnScreenHideCalled();
+            NameField.DeactivateInputField();
+            PasswordField.DeactivateInputField();
+        }
 
 
         private void OnEnable()
@@ -31,14 +44,12 @@ namespace MLAPI.Demo
 
         void OnHost()
         {
-            CustomNetworkManager.Instance.Password = PasswordField.text;
-
-            CustomNetworkManager.Instance.Host();
+            CustomNetworkManager.Instance.Host(NameField.text, PasswordField.text);
         }
 
         void OnJoin()
         {
-            CustomNetworkManager.Instance.Client(PasswordField.text);
+            CustomNetworkManager.Instance.Client(new ConnectionPayload(NameField.text, PasswordField.text));
 
    
         }
