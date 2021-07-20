@@ -8,8 +8,8 @@ namespace MLAPI.Demo
 {
     public class MainmenuUI : ScreenView
     {
-        [SerializeField] Button host;
-        [SerializeField] Button join;
+        [SerializeField] Button btnHost;
+        [SerializeField] Button btnJoin;
 
 
         [SerializeField] InputField NameField;
@@ -32,14 +32,14 @@ namespace MLAPI.Demo
 
         private void OnEnable()
         {
-            host.onClick.AddListener(OnHost);
-            join.onClick.AddListener(OnJoin);
+            btnHost.onClick.AddListener(OnHost);
+            btnJoin.onClick.AddListener(OnJoin);
         }
 
         private void OnDisable()
         {
-            host.onClick.RemoveAllListeners();
-            join.onClick.RemoveAllListeners();
+            btnHost.onClick.RemoveAllListeners();
+            btnJoin.onClick.RemoveAllListeners();
         }
 
         void OnHost()
@@ -50,8 +50,6 @@ namespace MLAPI.Demo
         void OnJoin()
         {
             CustomNetworkManager.Instance.Client(new ConnectionPayload(NameField.text, PasswordField.text));
-
-   
         }
     }
 }

@@ -4,24 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using MLAPI.NetworkVariable;
+using MLAPI.Messaging;
+using System;
 
 namespace MLAPI.Demo
 {
     public class PlayerHandler : NetworkBehaviour
     {
         public TextMeshPro PlayerText;
-        [SerializeField] Rigidbody rigidbody;
+        [SerializeField] public int score;
+
+        NetworkVariable<int> displayScore = new NetworkVariable<int>();
 
         private NetworkVariableString displayName = new NetworkVariableString();
         
-        
-        private void Start() {
-            if (!IsLocalPlayer) {
-                Destroy(rigidbody);
-            }
-        }
-
-
         public override void NetworkStart()
         {
             if (!IsServer) { return; }
@@ -37,11 +33,14 @@ namespace MLAPI.Demo
         private void OnEnable()
         {
             displayName.OnValueChanged += HandleDisplayNameChanged;
+            displayScore.OnValueChanged += HandleDisplayScoreChanges;
         }
+
 
         private void OnDisable()
         {
             displayName.OnValueChanged -= HandleDisplayNameChanged;
+            displayScore.OnValueChanged -= HandleDisplayScoreChanges;
         }
 
         private void HandleDisplayNameChanged(string oldDisplayName, string newDisplayName)
@@ -49,6 +48,14 @@ namespace MLAPI.Demo
             PlayerText.text = newDisplayName;
         }
 
+        private void HandleDisplayScoreChanges(int previousValue, int newValue) {
+            score = newValue;
+        }
+
+        [ServerRpc]
+        public void OnIncereseScoreServerRpc() {
+            displayScore.Value++;
+        }
 
     }
 }

@@ -11,12 +11,16 @@ namespace MLAPI.Demo {
         [SerializeField] Vector2 xPosition;
         [SerializeField] Vector2 zPosition;
 
+
         private void OnEnable() {
             CustomNetworkManager.Instance.OnServerStarted += OnHostStart;
+            Events.OnCoinCollected += SpawnCoinServerRpc;
         }
 
         private void OnDisable() {
             CustomNetworkManager.Instance.OnServerStarted -= OnHostStart;
+            Events.OnCoinCollected -= SpawnCoinServerRpc;
+
         }
 
         void OnHostStart() {
@@ -31,19 +35,8 @@ namespace MLAPI.Demo {
 
         [ServerRpc]
         void SpawnCoinServerRpc() {
-            StartCoinGenration();
-        }
-
-        void StartCoinGenration() {
-            StartCoroutine(OnGenerateAfterDelay());
-        }
-
-        IEnumerator OnGenerateAfterDelay() {
-            int second = Random.Range(1, 10);
-            Debug.Log("Start Spawning " + second);
-            yield return new WaitForSeconds(second);
-            OnGenerateCoin();
-            StartCoroutine(OnGenerateAfterDelay());
+            if (IsHost)
+                OnGenerateCoin();
         }
 
         void OnGenerateCoin() {

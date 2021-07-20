@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6648035639916257712}
   - component: {fileID: 6648035639916257716}
   - component: {fileID: 3550323122684724428}
+  - component: {fileID: 7072114341037472833}
+  - component: {fileID: 4663368195959904668}
   m_Layer: 0
   m_Name: Coin
   m_TagString: coin
@@ -163,3 +165,31 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &7072114341037472833
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648035639916257713}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &4663368195959904668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648035639916257713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547c80007443a4ad595879fbb8cf21b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -8,21 +8,21 @@ namespace MLAPI.Demo {
 
     public class CoinCollector : NetworkBehaviour
     {
-        NetworkObject c_Collider;
-
+        bool isCollected;
         private void OnTriggerEnter(Collider other) {
-            if (other.tag != "coin") {
-                c_Collider = other.gameObject.GetComponent<NetworkObject>();
+
+            if (other.tag == "Player" && !isCollected) {
+                other.gameObject.GetComponent<PlayerHandler>().OnIncereseScoreServerRpc();
                 OnDestroyCoinServerRpc();
+                Events.CoinCollected();
+                isCollected = true;
             }
 
         }
 
-
         [ServerRpc]
         void OnDestroyCoinServerRpc() {
-            if (c_Collider != null)
-                c_Collider.Despawn();
+            Destroy(gameObject);
         }
 
     }
