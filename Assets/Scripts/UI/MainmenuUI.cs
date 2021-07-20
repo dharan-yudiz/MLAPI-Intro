@@ -11,6 +11,12 @@ namespace MLAPI.Demo
         [SerializeField] Button host;
         [SerializeField] Button join;
 
+
+        [SerializeField] InputField NameField;
+        [SerializeField] InputField PasswordField;
+
+
+
         private void OnEnable()
         {
             host.onClick.AddListener(OnHost);
@@ -25,18 +31,16 @@ namespace MLAPI.Demo
 
         void OnHost()
         {
-            CustomNetworkManager.Instance.StartHost();
+            CustomNetworkManager.Instance.Password = PasswordField.text;
 
-            UIController.instance.HideCurrentScreen();
-            UIController.instance.ShowThisScreen(ScreenType.GamePlay, EnableDirection.Forward);
+            CustomNetworkManager.Instance.Host();
         }
 
         void OnJoin()
         {
-            CustomNetworkManager.Instance.StartClient();
+            CustomNetworkManager.Instance.Client(PasswordField.text);
 
-            UIController.instance.HideCurrentScreen();
-            UIController.instance.ShowThisScreen(ScreenType.GamePlay, EnableDirection.Forward);
+   
         }
     }
 }

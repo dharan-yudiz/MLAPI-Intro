@@ -9,6 +9,7 @@ namespace MLAPI.Demo
 {
     public class PlayerMovement : NetworkBehaviour
     {
+
         [SerializeField] CharacterController controller;
         [SerializeField] Transform camaraTransform;
         [SerializeField] float speed = 5f;
