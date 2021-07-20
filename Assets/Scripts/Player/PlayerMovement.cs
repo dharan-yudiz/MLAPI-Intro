@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
 
-
-
 namespace MLAPI.Demo
 {
     public class PlayerMovement : NetworkBehaviour
@@ -14,7 +12,7 @@ namespace MLAPI.Demo
         [SerializeField] Transform camaraTransform;
         [SerializeField] float speed = 5f;
         [SerializeField] float lookSpeed = 3f;
-
+        
         float pitch;
 
         private void Awake()
