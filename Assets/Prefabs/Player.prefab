@@ -482,6 +482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerText: {fileID: 328052925190105576}
+  score: 0
+  renderer: {fileID: 7050377566185271394}
 --- !u!136 &9182616101620496040
 CapsuleCollider:
   m_ObjectHideFlags: 0

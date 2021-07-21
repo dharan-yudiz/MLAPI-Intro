@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,11 +195,11 @@ MonoBehaviour:
   PlayerText: {fileID: 6118079081591908067}
   meshRenderer: {fileID: 3584104361810755433}
   Colors:
-  - {r: 0.9607844, g: 0, b: 0, a: 0}
-  - {r: 0.9607844, g: 0.68235296, b: 0, a: 0}
-  - {r: 0.015686275, g: 0.9607844, b: 0, a: 0}
-  - {r: 0.003921569, g: 0.16470589, b: 0.9607844, a: 0}
-  - {r: 0.9607844, g: 0, b: 0.8235295, a: 0}
+  - {r: 0.9607844, g: 0, b: 0, a: 1}
+  - {r: 0.9607844, g: 0.68235296, b: 0, a: 1}
+  - {r: 0.015686275, g: 0.9607844, b: 0, a: 1}
+  - {r: 0.003921569, g: 0.16470589, b: 0.9607844, a: 1}
+  - {r: 0.9607844, g: 0, b: 0.8235295, a: 1}
   NameField: {fileID: 1958228432}
 --- !u!224 &38072361
 RectTransform:
@@ -1093,18 +1093,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 0}
   _raycaster: {fileID: 0}
-<<<<<<< Updated upstream
   btnHost: {fileID: 1749544986}
-  btnJoin: {fileID: 1068830393}
-  NameField: {fileID: 1371798421}
-  PasswordField: {fileID: 933296924}
---- !u!1 &757431078
-=======
-  host: {fileID: 1749544986}
-  join: {fileID: 881500953}
+  btnJoin: {fileID: 881500953}
   PasswordField: {fileID: 1032278425}
---- !u!1 &862300690
->>>>>>> Stashed changes
+--- !u!1 &757431078
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1129,7 +1121,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862300690}
+  m_GameObject: {fileID: 757431078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1148,7 +1140,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862300690}
+  m_GameObject: {fileID: 757431078}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -1204,7 +1196,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862300690}
+  m_GameObject: {fileID: 757431078}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -1234,7 +1226,7 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862300690}
+  m_GameObject: {fileID: 757431078}
   m_CullTransparentMesh: 1
 --- !u!1 &874429462
 GameObject:
@@ -2172,8 +2164,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1179548262}
   - component: {fileID: 1179548265}
-  - component: {fileID: 1179548264}
   - component: {fileID: 1179548263}
+  - component: {fileID: 1179548264}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -2205,24 +2197,12 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-<<<<<<< Updated upstream
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75bd251469a2d146a35346e50d3801f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvas: {fileID: 0}
-  _raycaster: {fileID: 0}
-  scoreText: {fileID: 0}
---- !u!114 &1412641627
-MonoBehaviour:
-=======
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.5
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1179548264
 MeshRenderer:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2753,6 +2733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 0}
   _raycaster: {fileID: 0}
+  scoreText: {fileID: 0}
 --- !u!114 &1412641627
 MonoBehaviour:
   m_ObjectHideFlags: 0

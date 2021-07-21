@@ -1,4 +1,5 @@
 using MLAPI;
+using MLAPI.Transports;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,7 +40,14 @@ namespace MLAPI.Demo
             OnServerStarted -= HandleServerStarted;
             OnClientConnectedCallback -= HandleClientConnected;
             OnClientDisconnectCallback -= HandleClientDisconnect;
+
+            if (IsServer || IsHost)
+            {
+                StopServer();
+            }
+
         }
+
 
 
         public void Host(string password)
@@ -78,6 +86,7 @@ namespace MLAPI.Demo
             UIController.instance.HideCurrentScreen();
             UIController.instance.ShowThisScreen(ScreenType.StartGame, EnableDirection.Forward);
         }
+
 
 
         public static PlayerData? GetPlayerData(ulong clientId)
@@ -149,9 +158,8 @@ namespace MLAPI.Demo
         {
             if (obj.Equals(LocalClientId))
             {
-
                 UIController.instance.HideCurrentScreen();
-                UIController.instance.ShowThisScreen(ScreenType.GamePlay, EnableDirection.Forward);                
+                UIController.instance.ShowThisScreen(ScreenType.GamePlay, EnableDirection.Forward);
             }
         }
 

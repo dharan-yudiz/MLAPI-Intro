@@ -12,7 +12,7 @@ namespace MLAPI.Demo {
         private void OnTriggerEnter(Collider other) {
 
             if (other.tag == "Player" && !isCollected) {
-                other.gameObject.GetComponent<PlayerHandler>().OnIncereseScoreServerRpc();
+                other.gameObject.GetComponent<PlayerHandler>().Score.Value++;
                 OnDestroyCoinServerRpc();
                 Events.CoinCollected();
                 isCollected = true;

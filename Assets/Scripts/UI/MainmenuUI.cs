@@ -48,14 +48,9 @@ namespace MLAPI.Demo
 
         void OnJoin()
         {
-<<<<<<< Updated upstream
-            CustomNetworkManager.Instance.Client(new ConnectionPayload(NameField.text, PasswordField.text));
-=======
-            PasswordField.DeactivateInputField();
-            CustomNetworkManager.Instance.Client(new ConnectionPayload(GameManager.Instance.currentPlayerData.PlayerName, PasswordField.text, GameManager.Instance.currentPlayerData.PlayerColor));
+            CustomNetworkManager.Instance.Client(new ConnectionPayload(GameManager.Instance.currentPlayerData.PlayerName, PasswordField.text,GameManager.Instance.currentPlayerData.PlayerColor));
 
    
->>>>>>> Stashed changes
         }
     }
 }
