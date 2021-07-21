@@ -17,10 +17,16 @@ namespace MLAPI.Demo
             if (other.tag == "Player" && !isCollected)
             {
                 OnDestroyCoinServerRpc();
-                //UpdateScoreServerRpc(other.gameObject.GetComponent<PlayerHandler>().OwnerClientId);
                 PlayerHandler handler = other.gameObject.GetComponent<PlayerHandler>();
 
                 handler.Score.Value++;
+
+
+                if (IsServer || IsHost)
+                {
+                    NotifyPlayersClientRpc(CustomNetworkManager.GetPlayerData(handler.OwnerClientId).PlayerName);
+                }
+
 
                 if (handler.IsLocalPlayer)
                     GameManager.Instance.Score++;
@@ -34,23 +40,21 @@ namespace MLAPI.Demo
         [ServerRpc]
         void OnDestroyCoinServerRpc()
         {
-            Destroy(gameObject);
-        }   
-        
-        [ServerRpc]
-        void UpdateScoreServerRpc(ulong playerID)
-        {
-            CustomNetworkManager.GetPlayerData(playerID).PlayerScore++;
-
-            if (!CustomNetworkManager.Singleton.ConnectedClients.TryGetValue(playerID, out NetworkClient networkClient))
-                return;
-
-            if (!networkClient.PlayerObject.TryGetComponent<PlayerHandler>(out PlayerHandler playerHandler))
-                return;
-
-            playerHandler.Score.Value++;
+            if (IsOwner)
+            {
+                Destroy(gameObject);
+            }
         }
 
+
+        [ClientRpc]
+        public void NotifyPlayersClientRpc(string Playername)
+        {
+            if (Playername != GameManager.Instance.currentPlayerData.PlayerName)
+            {
+                NonIntrusivePopup.Instance.Show(Playername + " has collected a coin!");
+            }
+        }
 
     }
 

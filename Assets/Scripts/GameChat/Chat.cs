@@ -8,40 +8,35 @@ using UnityEngine;
 
 namespace MLAPI.Demo
 {
+    [Serializable]
+    public class Message
+    {
+        public string Playername;
+        public string MessageText;
+
+        public Message(string name, string msgtext)
+        {
+            Playername = name;
+            MessageText = msgtext;
+        }
+    }
+
     public class Chat : NetworkBehaviour
     {
-        private NetworkList<string> ChatMessages = new NetworkList<string>(new NetworkVariable.NetworkVariableSettings
+        private NetworkList<Message> _chatMessages = new NetworkList<Message>(new NetworkVariable.NetworkVariableSettings
         {
-            ReadPermission = MLAPI.NetworkVariable.NetworkVariablePermission.Everyone,
-            WritePermission = MLAPI.NetworkVariable.NetworkVariablePermission.Everyone,
+            ReadPermission = NetworkVariable.NetworkVariablePermission.Everyone,
+            WritePermission = NetworkVariable.NetworkVariablePermission.Everyone,
             SendTickrate = 5
 
-        }, new List<string>());
+        }, new List<Message>());
 
-        private void OnEnable()
-        {
-            PopulateList();
-            ChatMessages.OnListChanged += onRecieveMessage;
-        }
+        public NetworkList<Message> ChatMessages => _chatMessages;
 
-        private void OnDisable()
-        {
-            ChatMessages.OnListChanged -= onRecieveMessage;
-        }
-
-        private void PopulateList()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void onRecieveMessage(NetworkListEvent<string> changeEvent)
-        {
-            throw new NotImplementedException();
-        }
 
         public void onSendMessage(string Text)
         {
-            ChatMessages.Add(Text);
+            ChatMessages.Add(new Message(GameManager.Instance.currentPlayerData.PlayerName,Text));
         }
     }
 }

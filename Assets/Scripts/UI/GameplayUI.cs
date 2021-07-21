@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 namespace MLAPI.Demo
 {
     public class GameplayUI : ScreenView
     {
-        [SerializeField] TextMeshProUGUI scoreText;
-        [SerializeField] TextMeshProUGUI nameText;
+        [SerializeField] Text scoreText;
+        [SerializeField] Text nameText;
 
+        public ChatUI chatUI;
         public override void OnScreenShowCalled() {
             base.OnScreenShowCalled();
             nameText.text = GameManager.Instance.currentPlayerData.PlayerName;
             scoreText.text = $"Score: {GameManager.Instance.Score}";
+            chatUI.StartListeningForMessages();
         }
 
         private void OnEnable() {
