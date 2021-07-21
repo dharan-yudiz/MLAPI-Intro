@@ -7,6 +7,7 @@ namespace MLAPI.Demo
     {
         public string PlayerName;
         public Color PlayerColor;
+        public int PlayerScore;
 
         public PlayerData(string playerName,Color color)
         {

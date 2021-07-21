@@ -4,25 +4,43 @@ using UnityEngine;
 using MLAPI;
 using MLAPI.Messaging;
 
-namespace MLAPI.Demo {
+namespace MLAPI.Demo
+{
 
     public class CoinCollector : NetworkBehaviour
     {
         bool isCollected;
-        private void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other)
+        {
 
-            if (other.tag == "Player" && !isCollected) {
-                other.gameObject.GetComponent<PlayerHandler>().Score.Value++;
+            if (other.tag == "Player" && !isCollected)
+            {
                 OnDestroyCoinServerRpc();
                 Events.CoinCollected();
+                UpdateScoreServerRpc(other.gameObject.GetComponent<PlayerHandler>().OwnerClientId);
+                GameManager.Instance.Score++;
                 isCollected = true;
             }
 
         }
 
+        
+
+
         [ServerRpc]
-        void OnDestroyCoinServerRpc() {
+        void OnDestroyCoinServerRpc()
+        {
+           
+
             Destroy(gameObject);
+        }   
+        
+        [ServerRpc]
+        void UpdateScoreServerRpc(ulong playerID)
+        {
+            CustomNetworkManager.GetPlayerData(playerID).PlayerScore++;
+            //player.Score.Value++;
+
         }
 
     }

@@ -12,13 +12,18 @@ namespace MLAPI.Demo
     public class PlayerHandler : NetworkBehaviour
     {
         public TextMeshPro PlayerText;
-        [SerializeField] int score;
 
         public Renderer renderer;
 
+        public int PlayerScore;
 
 
-        private NetworkVariable<int> displayScore = new NetworkVariable<int>();
+        private NetworkVariable<int> displayScore = new NetworkVariable<int>(new NetworkVariableSettings {
+
+            ReadPermission = NetworkVariablePermission.ServerOnly,
+            WritePermission = NetworkVariablePermission.ServerOnly
+
+        });
         private NetworkVariableString displayName = new NetworkVariableString();
         private NetworkVariableColor playerColor = new NetworkVariableColor();
 
@@ -67,10 +72,9 @@ namespace MLAPI.Demo
             renderer.material.color = newValue;
         }
 
-
         private void HandleDisplayScoreChanges(int previousValue, int newValue)
         {
-            score = newValue;
+            PlayerScore = newValue;
         }
 
 

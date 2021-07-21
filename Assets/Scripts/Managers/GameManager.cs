@@ -11,6 +11,7 @@ namespace MLAPI.Demo
         public static GameManager Instance => _instance;
 
         public PlayerData currentPlayerData;
+        public int Score;
 
         private void Awake()
         {

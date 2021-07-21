@@ -110,34 +110,19 @@ namespace MLAPI.Demo
             bool approveConnection = connectionPayload.Password == serverPassword;
 
 
-            Vector3 spawnPos = Vector3.zero;
-            Quaternion spawnRot = Quaternion.identity;
+            float randomeXposition = UnityEngine.Random.Range(-30, 30);
+            float randomeZposition = UnityEngine.Random.Range(-30, 30);
 
             if (approveConnection)
             {
-
-                switch (ConnectedClients.Count)
-                {
-                    case 1:
-                        spawnPos = new Vector3(0f, 0f, 0f);
-                        spawnRot = Quaternion.Euler(0f, 180f, 0f);
-                        break;
-                    case 2:
-                        spawnPos = new Vector3(2f, 0f, 0f);
-                        spawnRot = Quaternion.Euler(0f, 225, 0f);
-                        break;
-                }
-
-
                 ClientData[clientID] = new PlayerData(connectionPayload.PlayerName, connectionPayload.PlayerColor);
-
             }
             else
             {
                 Debug.Log("Connection rejected");
             }
 
-            callback(true, null, approveConnection, spawnPos, spawnRot);
+            callback(true, null, approveConnection, new Vector3(randomeXposition, 0, randomeZposition), Quaternion.identity);
 
         }
         private void HandleClientDisconnect(ulong obj)

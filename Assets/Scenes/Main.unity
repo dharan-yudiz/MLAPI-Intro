@@ -771,7 +771,6 @@ MonoBehaviour:
     NetworkTransport: {fileID: 603894524}
     RegisteredScenes:
     - Main
-    - Lobby
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 7050377566667367118, guid: 61159509985e1054e8e9a45d4a757498, type: 3}
@@ -4302,6 +4301,7 @@ MonoBehaviour:
   currentPlayerData:
     PlayerName: 
     PlayerColor: {r: 0, g: 0, b: 0, a: 0}
+  Score: 0
 --- !u!4 &2047025335
 Transform:
   m_ObjectHideFlags: 0
