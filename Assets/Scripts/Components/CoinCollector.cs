@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
 using MLAPI.Messaging;
+using MLAPI.Connection;
 
 namespace MLAPI.Demo
 {
@@ -16,22 +17,23 @@ namespace MLAPI.Demo
             if (other.tag == "Player" && !isCollected)
             {
                 OnDestroyCoinServerRpc();
+                //UpdateScoreServerRpc(other.gameObject.GetComponent<PlayerHandler>().OwnerClientId);
+                PlayerHandler handler = other.gameObject.GetComponent<PlayerHandler>();
+
+                handler.Score.Value++;
+
+                if (handler.IsLocalPlayer)
+                    GameManager.Instance.Score++;
+
                 Events.CoinCollected();
-                UpdateScoreServerRpc(other.gameObject.GetComponent<PlayerHandler>().OwnerClientId);
-                GameManager.Instance.Score++;
                 isCollected = true;
             }
 
         }
 
-        
-
-
         [ServerRpc]
         void OnDestroyCoinServerRpc()
         {
-           
-
             Destroy(gameObject);
         }   
         
@@ -39,9 +41,16 @@ namespace MLAPI.Demo
         void UpdateScoreServerRpc(ulong playerID)
         {
             CustomNetworkManager.GetPlayerData(playerID).PlayerScore++;
-            //player.Score.Value++;
 
+            if (!CustomNetworkManager.Singleton.ConnectedClients.TryGetValue(playerID, out NetworkClient networkClient))
+                return;
+
+            if (!networkClient.PlayerObject.TryGetComponent<PlayerHandler>(out PlayerHandler playerHandler))
+                return;
+
+            playerHandler.Score.Value++;
         }
+
 
     }
 

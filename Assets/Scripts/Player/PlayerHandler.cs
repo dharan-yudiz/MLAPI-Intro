@@ -20,8 +20,8 @@ namespace MLAPI.Demo
 
         private NetworkVariable<int> displayScore = new NetworkVariable<int>(new NetworkVariableSettings {
 
-            ReadPermission = NetworkVariablePermission.ServerOnly,
-            WritePermission = NetworkVariablePermission.ServerOnly
+            ReadPermission = NetworkVariablePermission.Everyone,
+            WritePermission = NetworkVariablePermission.Everyone
 
         });
         private NetworkVariableString displayName = new NetworkVariableString();
@@ -75,6 +75,7 @@ namespace MLAPI.Demo
         private void HandleDisplayScoreChanges(int previousValue, int newValue)
         {
             PlayerScore = newValue;
+
         }
 
 
