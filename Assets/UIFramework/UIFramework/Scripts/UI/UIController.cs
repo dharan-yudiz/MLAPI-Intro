@@ -11,7 +11,8 @@ public struct ScreenCollection
 
 public enum ScreenType
 {
-    MainMenu,
+    PlayerSelection,
+    StartGame,
     GamePlay
 }
 
@@ -33,7 +34,7 @@ namespace MLAPI.Demo
 
         private void Start()
         {
-            ShowThisScreen(ScreenType.MainMenu, EnableDirection.Forward);
+            ShowThisScreen(ScreenType.PlayerSelection, EnableDirection.Forward);
         }
 
         public void ShowThisScreen(ScreenType _screenToShow, EnableDirection _direction, Action _tempAction = null)

@@ -25,6 +25,7 @@ namespace MLAPI.Demo
 
         private void Start()
         {
+
             OnServerStarted += HandleServerStarted;
             OnClientConnectedCallback += HandleClientConnected;
             Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
@@ -41,12 +42,12 @@ namespace MLAPI.Demo
         }
 
 
-        public void Host(string Playername, string password)
+        public void Host(string password)
         {
             serverPassword = password;
 
             ClientData = new Dictionary<ulong, PlayerData>();
-            ClientData[LocalClientId] = new PlayerData(Playername);
+            ClientData[LocalClientId] = GameManager.Instance.currentPlayerData;
 
             ConnectionApprovalCallback += ApprovalCheck;
             StartHost();
@@ -56,6 +57,7 @@ namespace MLAPI.Demo
         public void Client(ConnectionPayload connectionPayload)
         {
             var payload = JsonUtility.ToJson(connectionPayload);
+
 
             NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(payload);
             Singleton.StartClient();
@@ -74,7 +76,7 @@ namespace MLAPI.Demo
             }
 
             UIController.instance.HideCurrentScreen();
-            UIController.instance.ShowThisScreen(ScreenType.MainMenu, EnableDirection.Forward);
+            UIController.instance.ShowThisScreen(ScreenType.StartGame, EnableDirection.Forward);
         }
 
 
@@ -118,7 +120,7 @@ namespace MLAPI.Demo
                 }
 
 
-                ClientData[clientID] = new PlayerData(connectionPayload.PlayerName);
+                ClientData[clientID] = new PlayerData(connectionPayload.PlayerName, connectionPayload.PlayerColor);
 
             }
             else
@@ -139,7 +141,7 @@ namespace MLAPI.Demo
             if (obj.Equals(LocalClientId))
             {
                 UIController.instance.HideCurrentScreen();
-                UIController.instance.ShowThisScreen(ScreenType.MainMenu, EnableDirection.Forward);
+                UIController.instance.ShowThisScreen(ScreenType.StartGame, EnableDirection.Forward);
             }
         }
 
@@ -147,8 +149,9 @@ namespace MLAPI.Demo
         {
             if (obj.Equals(LocalClientId))
             {
+
                 UIController.instance.HideCurrentScreen();
-                UIController.instance.ShowThisScreen(ScreenType.GamePlay, EnableDirection.Forward);
+                UIController.instance.ShowThisScreen(ScreenType.GamePlay, EnableDirection.Forward);                
             }
         }
 
@@ -159,6 +162,12 @@ namespace MLAPI.Demo
                 HandleClientConnected(ServerClientId);
             }
         }
+
+        private void OnConnectedToServer()
+        {
+            Debug.Log("Connected to server");
+        }
+
         #endregion
     }
 }

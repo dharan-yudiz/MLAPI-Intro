@@ -1,13 +1,17 @@
+using UnityEngine;
+
 namespace MLAPI.Demo
 {
     [System.Serializable]
     public class PlayerData
     {
-        public string PlayerName { get; private set; }
+        public string PlayerName;
+        public Color PlayerColor;
 
-        public PlayerData(string playerName)
+        public PlayerData(string playerName,Color color)
         {
             PlayerName = playerName;
+            PlayerColor = color;
         }
     }
 

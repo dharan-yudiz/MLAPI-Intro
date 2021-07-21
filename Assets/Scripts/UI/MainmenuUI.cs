@@ -12,21 +12,19 @@ namespace MLAPI.Demo
         [SerializeField] Button btnJoin;
 
 
-        [SerializeField] InputField NameField;
         [SerializeField] InputField PasswordField;
 
         public override void OnScreenShowCalled()
         {
             base.OnScreenShowCalled();
-            NameField.text = "";
+            PasswordField.enabled = true;
             PasswordField.text = "";
         }
 
         public override void OnScreenHideCalled()
         {
             base.OnScreenHideCalled();
-            NameField.DeactivateInputField();
-            PasswordField.DeactivateInputField();
+            PasswordField.enabled = false;
         }
 
 
@@ -44,12 +42,20 @@ namespace MLAPI.Demo
 
         void OnHost()
         {
-            CustomNetworkManager.Instance.Host(NameField.text, PasswordField.text);
+            PasswordField.DeactivateInputField();
+            CustomNetworkManager.Instance.Host(PasswordField.text);
         }
 
         void OnJoin()
         {
+<<<<<<< Updated upstream
             CustomNetworkManager.Instance.Client(new ConnectionPayload(NameField.text, PasswordField.text));
+=======
+            PasswordField.DeactivateInputField();
+            CustomNetworkManager.Instance.Client(new ConnectionPayload(GameManager.Instance.currentPlayerData.PlayerName, PasswordField.text, GameManager.Instance.currentPlayerData.PlayerColor));
+
+   
+>>>>>>> Stashed changes
         }
     }
 }
