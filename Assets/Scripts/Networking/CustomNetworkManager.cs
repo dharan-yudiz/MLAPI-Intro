@@ -127,7 +127,7 @@ namespace MLAPI.Demo
         }
         private void HandleClientDisconnect(ulong obj)
         {
-            if (NetworkManager.Singleton.IsServer)
+            if (Singleton.IsServer)
             {
                 ClientData.Remove(obj);
             }

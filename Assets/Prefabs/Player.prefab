@@ -449,8 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 6054989579509460977}
   camaraTransform: {fileID: 6332145119057021995}
-  speed: 5
-  lookSpeed: 3
+  speed: 10
+  lookSpeed: 5
 --- !u!143 &6054989579509460977
 CharacterController:
   m_ObjectHideFlags: 0
@@ -482,8 +482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerText: {fileID: 328052925190105576}
-  score: 0
   renderer: {fileID: 7050377566185271394}
+  PlayerScore: 0
 --- !u!136 &9182616101620496040
 CapsuleCollider:
   m_ObjectHideFlags: 0

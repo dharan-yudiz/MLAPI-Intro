@@ -10,12 +10,14 @@ using UnityEngine.UI;
 
 namespace MLAPI.Demo
 {
-    public class ChatUI : NetworkBehaviour
+    public class ChatUI : MonoBehaviour
     {
         Chat ChatNetworking;
 
         public InputField MessageField;
         public Text MessagesText;
+
+        public Animator chatPanelAnimator;
 
         private void Awake()
         {
@@ -51,6 +53,11 @@ namespace MLAPI.Demo
         private void onRecieveMessage(NetworkListEvent<string> changeEvent)
         {
             MessagesText.text += changeEvent.Value + " \n";
+
+            if (!isPanelActive)
+            {
+                TogglePanel();
+            }
         }
 
         public void SendTextMessage()
@@ -62,6 +69,28 @@ namespace MLAPI.Demo
             }
         }
 
+        bool isPanelActive = false;
+
+        public void onPanelShowEnd()
+        {
+            isPanelActive = true;
+        }
+        public void onPanelHideEnd()
+        {
+            isPanelActive = false;
+        }
+
+        public void TogglePanel()
+        {
+            if (isPanelActive)
+            {
+                chatPanelAnimator.SetTrigger("Hide");
+            }
+            else
+            {
+                chatPanelAnimator.SetTrigger("Show");
+            }
+        }
 
     }
 }

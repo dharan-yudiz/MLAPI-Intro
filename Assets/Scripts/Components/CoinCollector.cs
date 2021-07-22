@@ -4,6 +4,7 @@ using UnityEngine;
 using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.Connection;
+using DG.Tweening;
 
 namespace MLAPI.Demo
 {
@@ -11,6 +12,12 @@ namespace MLAPI.Demo
     public class CoinCollector : NetworkBehaviour
     {
         bool isCollected;
+
+        private void Start()
+        {
+            transform.DORotate(new Vector3(-45,360f, -45), 1f,RotateMode.WorldAxisAdd).SetLoops(-1,LoopType.Yoyo);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
 
@@ -42,6 +49,7 @@ namespace MLAPI.Demo
         {
             if (IsOwner)
             {
+                DOTween.KillAll();
                 Destroy(gameObject);
             }
         }

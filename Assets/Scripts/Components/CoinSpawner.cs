@@ -36,7 +36,6 @@ namespace MLAPI.Demo
         public override void NetworkStart()
         {
             base.NetworkStart();
-            Debug.Log("Start Network");
         }
 
         [ServerRpc]
