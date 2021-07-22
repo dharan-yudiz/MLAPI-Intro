@@ -41,7 +41,7 @@ namespace MLAPI.Demo
             {
                 foreach (var message in ChatNetworking.ChatMessages)
                 {
-                    text += "<b>" + GameManager.Instance.currentPlayerData.PlayerName+ "</b> : " + message + " \n";
+                    text += message + " \n";
                 }
             }
 
@@ -50,7 +50,7 @@ namespace MLAPI.Demo
 
         private void onRecieveMessage(NetworkListEvent<string> changeEvent)
         {
-            MessagesText.text += "<b>" + GameManager.Instance.currentPlayerData.PlayerName + "</b> : " + changeEvent.Value + " \n";
+            MessagesText.text += changeEvent.Value + " \n";
         }
 
         public void SendTextMessage()

@@ -11,26 +11,12 @@ using System.IO;
 
 namespace MLAPI.Demo
 {
-    [Serializable]
-    public class Message
-    {
-        public string Playername;
-        public string MessageText;
-
-        public Message(string name, string msgtext)
-        {
-            Playername = name;
-            MessageText = msgtext;
-        }
-
-    }
-
     public class Chat : NetworkBehaviour
     {
         private NetworkList<string> _chatMessages = new NetworkList<string>(new NetworkVariable.NetworkVariableSettings
         {
-            ReadPermission = NetworkVariable.NetworkVariablePermission.Everyone,
-            WritePermission = NetworkVariable.NetworkVariablePermission.Everyone,
+            ReadPermission = NetworkVariablePermission.Everyone,
+            WritePermission = NetworkVariablePermission.Everyone,
             SendTickrate = 5
 
         }, new List<string>());
@@ -39,7 +25,7 @@ namespace MLAPI.Demo
 
         public void onSendMessage(string Text)
         {
-            ChatMessages.Add(Text);
+            ChatMessages.Add("<b>" + GameManager.Instance.currentPlayerData.PlayerName + "</b> : " + Text);
         }
     }
 
