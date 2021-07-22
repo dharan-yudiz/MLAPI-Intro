@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace MLAPI.Demo
 {
-    public class ChatUI : MonoBehaviour
+    public class ChatUI : NetworkBehaviour
     {
         Chat ChatNetworking;
 
@@ -41,20 +41,19 @@ namespace MLAPI.Demo
             {
                 foreach (var message in ChatNetworking.ChatMessages)
                 {
-                    text += "<b>" + message.Playername + "</b> : " + message.MessageText + " \n";
+                    text += "<b>" + GameManager.Instance.currentPlayerData.PlayerName+ "</b> : " + message + " \n";
                 }
             }
 
             MessagesText.text = text;
         }
 
-        private void onRecieveMessage(NetworkListEvent<Message> changeEvent)
+        private void onRecieveMessage(NetworkListEvent<string> changeEvent)
         {
-            MessagesText.text += "<b>" + changeEvent.Value.Playername + "</b> : " + changeEvent.Value.MessageText + " \n";
+            MessagesText.text += "<b>" + GameManager.Instance.currentPlayerData.PlayerName + "</b> : " + changeEvent.Value + " \n";
         }
 
-        [ServerRpc]
-        public void SendTextMessageServerRpc()
+        public void SendTextMessage()
         {
             if (!string.IsNullOrEmpty(MessageField.text))
             {

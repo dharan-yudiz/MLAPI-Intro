@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 276981116}
   m_HandleRect: {fileID: 276981115}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3945,7 +3945,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1724283071}
         m_TargetAssemblyTypeName: MLAPI.Demo.ChatUI, Assembly-CSharp
-        m_MethodName: SendTextMessageServerRpc
+        m_MethodName: SendTextMessage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4854,6 +4854,7 @@ GameObject:
   - component: {fileID: 1724283073}
   - component: {fileID: 1724283072}
   - component: {fileID: 1724283071}
+  - component: {fileID: 1724283075}
   m_Layer: 5
   m_Name: ChatUI
   m_TagString: Untagged
@@ -4946,6 +4947,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4f121e814a6a943bc09bf0b85a10dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1724283075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724283069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkInstanceId: 0
+  PrefabHash: 11578933033513660949
+  PrefabHashGenerator: ChatUI
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
 --- !u!1 &1733962765
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,13 @@
 
 using MLAPI;
+using MLAPI.Messaging;
 using MLAPI.NetworkVariable.Collections;
 using System;
+using MLAPI.NetworkVariable;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MLAPI.Transports;
+using System.IO;
 
 namespace MLAPI.Demo
 {
@@ -19,24 +22,25 @@ namespace MLAPI.Demo
             Playername = name;
             MessageText = msgtext;
         }
+
     }
 
     public class Chat : NetworkBehaviour
     {
-        private NetworkList<Message> _chatMessages = new NetworkList<Message>(new NetworkVariable.NetworkVariableSettings
+        private NetworkList<string> _chatMessages = new NetworkList<string>(new NetworkVariable.NetworkVariableSettings
         {
             ReadPermission = NetworkVariable.NetworkVariablePermission.Everyone,
             WritePermission = NetworkVariable.NetworkVariablePermission.Everyone,
             SendTickrate = 5
 
-        }, new List<Message>());
+        }, new List<string>());
 
-        public NetworkList<Message> ChatMessages => _chatMessages;
-
+        public NetworkList<string> ChatMessages => _chatMessages;
 
         public void onSendMessage(string Text)
         {
-            ChatMessages.Add(new Message(GameManager.Instance.currentPlayerData.PlayerName,Text));
+            ChatMessages.Add(Text);
         }
     }
+
 }
