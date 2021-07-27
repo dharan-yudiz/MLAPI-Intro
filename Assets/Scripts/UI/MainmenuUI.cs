@@ -11,7 +11,6 @@ namespace MLAPI.Demo
         [SerializeField] Button btnHost;
         [SerializeField] Button btnJoin;
 
-
         [SerializeField] InputField PasswordField;
 
         public override void OnScreenShowCalled()
@@ -49,8 +48,7 @@ namespace MLAPI.Demo
         void OnJoin()
         {
             CustomNetworkManager.Instance.Client(new ConnectionPayload(GameManager.Instance.currentPlayerData.PlayerName, PasswordField.text,GameManager.Instance.currentPlayerData.PlayerColor));
-
-   
         }
+
     }
 }

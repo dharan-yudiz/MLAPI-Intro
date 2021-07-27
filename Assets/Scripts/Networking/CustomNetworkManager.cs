@@ -66,9 +66,14 @@ namespace MLAPI.Demo
         {
             var payload = JsonUtility.ToJson(connectionPayload);
 
-
             NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(payload);
             Singleton.StartClient();
+        }
+
+        public void Server(string passwoed) {
+            serverPassword = passwoed;
+            ConnectionApprovalCallback += ApprovalCheck;
+            StartServer();
         }
 
         public void Leave()

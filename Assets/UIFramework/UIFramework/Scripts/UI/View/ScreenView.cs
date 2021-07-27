@@ -64,4 +64,8 @@ public class ScreenView : UIBase
             yield return null;
         }
     }
+
+        public void Awake() {
+            base.Awake();
+        }
 }
